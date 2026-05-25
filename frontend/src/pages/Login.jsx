@@ -6,10 +6,17 @@ import toast from "react-hot-toast";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      toast.error("Please enter email and password");
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await API.post("/auth/login", {
         email,
@@ -17,12 +24,12 @@ function Login() {
       });
 
       localStorage.setItem("token", res.data.token);
-
       toast.success("Login successful");
-
       navigate("/dashboard");
     } catch (error) {
-      toast.error("Invalid credentials");
+      toast.error(error.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,9 +60,10 @@ function Login() {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg transition"
+          disabled={loading}
+          className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white p-3 rounded-lg transition"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className="text-center mt-5 text-gray-600">

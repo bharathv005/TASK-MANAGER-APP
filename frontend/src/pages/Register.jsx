@@ -7,10 +7,22 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleRegister = async () => {
+    if (!name || !email || !password) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
+    setLoading(true);
     try {
       await API.post("/auth/register", {
         name,
@@ -18,11 +30,12 @@ function Register() {
         password,
       });
 
-      toast.success("Registration successful");
-
+      toast.success("Registration successful. Please login.");
       navigate("/");
     } catch (error) {
-      toast.error("Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,9 +72,10 @@ function Register() {
 
         <button
           onClick={handleRegister}
-          className="w-full bg-green-600 hover:bg-green-700 text-white p-3 rounded-lg transition"
+          disabled={loading}
+          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white p-3 rounded-lg transition"
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </button>
 
         <p className="text-center mt-5 text-gray-600">

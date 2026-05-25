@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import API from "../api";
 import toast from "react-hot-toast";
 import { Trash2, LogOut } from "lucide-react";
@@ -12,50 +12,52 @@ function Dashboard() {
 
   const stages = ["Todo", "In Progress", "Done"];
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const res = await API.get("/tasks");
-
       setTasks(res.data);
     } catch (error) {
-      toast.error("Failed to fetch tasks");
+      if (error.response?.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/");
+        toast.error("Session expired. Please login again.");
+      } else {
+        toast.error(error.response?.data?.message || "Failed to fetch tasks");
+      }
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   const createTask = async () => {
-    if (!title) {
-      return toast.error("Enter task title");
+    if (!title || title.trim() === "") {
+      return toast.error("Please enter a task title");
     }
 
     try {
       await API.post("/tasks", {
-        title,
+        title: title.trim(),
         stage: "Todo",
       });
 
-      toast.success("Task created");
-
+      toast.success("Task created successfully");
       setTitle("");
-
       fetchTasks();
     } catch (error) {
-      toast.error("Task creation failed");
+      toast.error(error.response?.data?.message || "Task creation failed");
     }
   };
 
   const deleteTask = async (id) => {
     try {
       await API.delete(`/tasks/${id}`);
-
-      toast.success("Task deleted");
-
+      toast.success("Task deleted successfully");
       fetchTasks();
     } catch (error) {
-      toast.error("Delete failed");
+      toast.error(error.response?.data?.message || "Failed to delete task");
     }
   };
 
@@ -64,12 +66,10 @@ function Dashboard() {
       await API.put(`/tasks/${id}`, {
         stage,
       });
-
-      toast.success("Task updated");
-
+      toast.success("Task updated successfully");
       fetchTasks();
     } catch (error) {
-      toast.error("Update failed");
+      toast.error(error.response?.data?.message || "Failed to update task");
     }
   };
 
