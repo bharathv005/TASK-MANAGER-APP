@@ -18,10 +18,10 @@ This application allows users to:
 # Live Demo
 
 ## Frontend Deployment
-https://task-manager-8xg0fxx7b-bvk-s-projects.vercel.app/
+https://task-manager-app-theta-bice.vercel.app
 
-## Backend Deployment
-https://task-manager-backend-3xhl.onrender.com
+## Working of project
+https://drive.google.com/file/d/15JpwG2Pf3ZWsJc9jyskqQKdTD91Ns5P9/view?usp=sharing
 
 ----
 # Features
