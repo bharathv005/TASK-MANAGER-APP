@@ -344,52 +344,49 @@ Protected APIs Accessed
 
 ---
 
-# UI Design Decisions
-
-- Used Tailwind CSS for rapid styling
-- Used responsive grid layout
-- Used card-based task display
-- Added toast notifications for better UX
-- Used minimal and clean modern UI design
-
----
-
 # Assumptions
 
 - Single-user task management system
-- Tasks only belong to logged-in users
-- Minimal validation used for faster implementation
-- Only three task stages supported
+- Each user can only access their own tasks
+- Tasks are categorized into only three stages:
+  - Todo
+  - In Progress
+  - Done
+- Basic authentication flow is sufficient for this assignment
+- Minimal form validation implemented for faster development
 
 ---
 
 # Tradeoffs
 
-- Used local component state instead of Redux
-- Did not implement drag-and-drop to keep project lightweight
-- Focused more on functionality and clean structure
+- Used local component state instead of Redux to keep the project lightweight
+- Did not implement drag-and-drop functionality to focus on core features
+- Focused on responsive UI and backend functionality over advanced animations
+- Used JWT authentication instead of OAuth for simpler implementation
+- Used MongoDB Atlas free tier for easy deployment and cloud database hosting
 
 ---
 
 # Technical Decisions
 
-## Why React + Vite?
-- Fast development
-- Lightweight setup
-- Better developer experience
+## Frontend
+- React + Vite chosen for fast development and better performance
+- Tailwind CSS used for rapid and responsive UI design
+- Axios used for API communication
+- React Router DOM used for frontend routing
 
-## Why Tailwind CSS?
-- Faster UI development
-- Responsive utility classes
-- Clean modern design
+## Backend
+- Node.js and Express.js used for lightweight REST API development
+- MongoDB Atlas used as cloud database service
+- Mongoose used for database schema modeling
+- JWT used for secure authentication
+- bcryptjs used for password hashing
 
-## Why MongoDB Atlas?
-- Free cloud database hosting
-- Easy integration with Node.js
-
-## Why JWT?
-- Lightweight authentication
-- Secure protected APIs
+## UI Decisions
+- Used card-based Kanban layout for better task organization
+- Implemented responsive grid layout for mobile and desktop support
+- Added toast notifications for better user interaction and feedback
+- Added loading and error handling for smoother user experience
 
 ---
 
