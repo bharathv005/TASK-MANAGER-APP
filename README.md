@@ -15,6 +15,15 @@ This application allows users to:
 
 ---
 
+# Live Demo
+
+## Frontend Deployment
+https://task-manager-8xg0fxx7b-bvk-s-projects.vercel.app/
+
+## Backend Deployment
+https://task-manager-backend-3xhl.onrender.com
+
+----
 # Features
 
 ## Authentication
