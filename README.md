@@ -12,21 +12,6 @@ This application allows users to:
   - In Progress
   - Done
 
----
-
-# Live Demo
-
-## Frontend Deployment
-Add your frontend deployment link here
-
-Example:
-https://your-frontend.vercel.app
-
-## Backend Deployment
-Add your backend deployment link here
-
-Example:
-https://your-backend.onrender.com
 
 ---
 
@@ -402,19 +387,6 @@ Protected APIs Accessed
 
 ---
 
-# Deployment
-
-## Frontend
-Recommended:
-- Vercel
-- Netlify
-
-## Backend
-Recommended:
-- Render
-- Railway
-
----
 
 # GitHub Repository
 
