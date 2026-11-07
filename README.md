@@ -12,7 +12,6 @@ This application allows users to:
   - In Progress
   - Done
 
-
 ---
 
 # Live Demo
